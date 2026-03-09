@@ -1,0 +1,17 @@
+// 本文件中的json内容将在云函数【运行】时作为参数传给云函数。
+// 配置教程参考：https://uniapp.dcloud.net.cn/uniCloud/quickstart?id=runparam
+// {
+// 	"url": "https://api.cloudopen.top/data/shopdata/",// 	"method": "POST",
+// 	"postData": {
+// 		"startDate": "2020-01-01",
+// 		"endDate": "2021-04-08"
+// 	},
+// 	"token": ""
+// }
+{
+	"url": "https://api.cloudopen.top/data/refresh/",	"method": "POST",
+	"postData": {
+		"empno": "ADMIN"
+	},
+	"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMjMsInVzZXJuYW1lIjoibzMwMlk1RnF1NDc1TGVNcS1NSXZVQU9feWt0byIsImV4cCI6MTYxODQ2ODc1MCwiZW1haWwiOiIifQ.NG2bJSCdiUp3Khmh5UmZNc4_TUhUyaQztqOpH8Zx56U"
+}

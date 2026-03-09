@@ -1,0 +1,104 @@
+{
+	"pages": [
+		{ "path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "大开云平台"
+			}
+		},
+		{
+			"path": "pages/login/index",
+			"style": {
+				"topWindow": false,
+				"leftWindow": false,
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/user/list",
+			"style": {
+				"navigationBarTitleText": "用户管理"
+			}
+		},
+		{
+			"path": "pages/member/bonusMall",
+			"style": {
+				"navigationBarTitleText": "积分商城"
+			}
+		},
+		{
+			"path": "pages/member/voucher",
+			"style": {
+				"navigationBarTitleText": "收据凭证"
+			}
+		},
+		{
+			"path": "uni_modules/uni-pay/pages/success/success",
+			"style": {
+				"backgroundColor": "#F8F8F8",
+				"navigationBarTitleText": "支付成功"
+			}
+		},
+		{
+			"path": "uni_modules/uni-pay/pages/ad-interactive-webview/ad-interactive-webview",
+			"style": {
+				"backgroundColor": "#F8F8F8",
+				"navigationBarTitleText": "ad"
+			}
+		},
+		{
+			"path": "uni_modules/uni-portal/pages/index",
+			"style":{
+				"navigationBarTitleText": "发布应用",
+				"enablePullDownRefresh": false
+		   }
+		}
+],
+	"subPackages": [{
+		"root": "pages_plugs",
+		"pages": [
+			{ "path": "error/404", "style": { "navigationBarTitleText": "页面不存在" } },
+			{ "path": "error/403", "style": { "navigationBarTitleText": "无权访问" } },
+			{ "path": "error/500", "style": { "navigationBarTitleText": "服务器出错了" } },
+			{ "path": "system/user/list" },
+			{ "path": "system/role/list" },
+			{ "path": "system/permission/list" },
+			{ "path": "system/menu/list" },
+			{ "path": "system/app/list", "style": { "navigationBarTitleText": "应用管理" } },
+			{ "path": "system/app-upgrade-center/list", "style": { "navigationBarTitleText": "版本管理" } },
+			{ "path": "system_uni/vk-global-data" },
+			{ "path": "system_uni/uni-id-log" },
+			{ "path": "system_uni/opendb-admin-log" },
+			{ "path": "system_uni/vk-components-dynamic" },
+			{ "path": "system_uni/uni-id-files/list" }
+		]
+	}, {
+		"root": "uni_modules/uni-upgrade-center/pages/version",
+		"pages": [
+			{ "path": "list", "style": { "navigationBarTitleText": "版本列表" } },
+			{ "path": "add", "style": { "navigationBarTitleText": "新版发布" } },
+			{ "path": "detail", "style": { "navigationBarTitleText": "版本信息查看" } }
+		]
+	}],
+	"globalStyle": {
+		"navigationStyle": "custom",
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"topWindow": {
+		"path": "windows/topWindow",
+		"style": {
+			"height": "100px"
+		},
+		"matchMedia": {
+			"minWidth": 0
+		}
+	},
+	"leftWindow": {
+		"path": "windows/leftWindow",
+		"style": {
+			"width": "240px"
+		}
+	}
+}
