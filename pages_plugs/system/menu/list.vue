@@ -1,12 +1,14 @@
 <template>
 	<view class="page-body">
 		<!-- 页面内容开始 -->
-
 		<!-- 自定义按钮区域开始 -->
 		<view class="vk-table-button-box">
 			<el-button type="success" size="small" icon="el-icon-circle-plus-outline" @click="addBtn">添加</el-button>
 			<el-button type="primary" size="small" icon="el-icon-s-tools" :disabled="!table1.selectItem" @click="bindPermissionBtn">设置内置权限</el-button>
 			<el-button type="success" size="small" icon="el-icon-circle-plus-outline" @click="addMenuByJsonBtn">通过JSON数组批量导入菜单</el-button>
+			<el-badge v-if="pluginMenus && pluginMenus.length > 0" :value="pluginMenus.length" class="item">
+				<el-button type="warning" size="small" icon="el-icon-circle-plus-outline" style="margin-right:0;" @click="addPluginMenuMenu">待添加的插件菜单</el-button>
+			</el-badge>
 		</view>
 		<!-- 自定义按钮区域结束 -->
 
@@ -17,12 +19,18 @@
 			:columns="table1.columns"
 			:query-form-param="queryForm1"
 			:right-btns="['detail_auto','update','delete']"
-			:default-expand-all="true"
+			:default-expand-all="false"
 			@update="updateBtn"
 			@delete="deleteBtn"
 			@current-change="currentChange"
 			@selection-change="selectionChange"
-		></vk-data-table>
+			@success="tableSuccess"
+		>
+			<!-- 排序值 -->
+			<template v-slot:sort="{ row, column, index }">
+				<el-input v-model="row.sort" size="mini" @change="sortChange($event, row)"/>
+			</template>
+		</vk-data-table>
 		<!-- 表格组件结束 -->
 
 		<!-- 添加或编辑的弹窗开始 -->
@@ -49,6 +57,9 @@
 
 		<!-- 通过JSON批量导入菜单 -->
 		<addMenuByJson v-model="formDatas.addMenuByJson" @success="refresh"></addMenuByJson>
+
+		<!-- 添加插件菜单 -->
+		<addPluginMenu v-model="formDatas.addPluginMenu" @success="refresh"></addPluginMenu>
 		<!-- 页面内容结束 -->
 	</view>
 </template>
@@ -56,9 +67,14 @@
 <script>
 	import bindPermission from './form/bindPermission.vue'
 	import addMenuByJson from './form/addMenuByJson.vue'
-	var that;													// 当前页面对象
-	var vk = uni.vk;									// vk实例
-	var originalForms = {};						// 表单初始化数据
+	import addPluginMenu from './form/addPluginMenu.vue'
+
+	import getPluginMenu from './libs/pluginMenu.js'
+	const pluginMenuJsons = getPluginMenu();
+
+	let that;													// 当前页面对象
+	let vk = uni.vk;									// vk实例
+	let originalForms = {};						// 表单初始化数据
 
 	const matchModeData = [
 		{ value:0, label:"完整路径" },
@@ -83,11 +99,13 @@
 	export default {
 		components:{
 			bindPermission,
-			addMenuByJson
+			addMenuByJson,
+			addPluginMenu
 		},
 		data() {
 			// 页面数据变量
 			return {
+				pluginMenus: [],
 				// 页面是否请求中或加载中
 				loading:false,
 				// init请求返回的数据
@@ -112,20 +130,48 @@
 						{ key:"url", title:"菜单URL", type:"text", width:250, align:"left" },
 						{ key:"comment", title:"备注", type:"text", width:200, align:"left" },
 						{ key:"permission", title:"菜单内置权限表", type:"text", width:120, defaultValue:"无" },
-						// 对应的权限是否启用
-						{ key:"enable", title:"是否启用", type:"tag", defaultValue:false,
-							data:[
-								{ value:true, label:"启用", tagType:"success" },
-								{ value:false, label:"禁用", tagType:"danger" },
-							]
+						{ key:"sort", title:"排序值", type:"number", width:100 },
+						{
+							key: "enable", title: "是否启用", type: "switch",
+							activeValue: true,
+							inactiveValue: false,
+							width: 80,
+							watch: (res) => {
+								let { value, row, change } = res;
+								vk.callFunction({
+									url: "admin/system/menu/sys/updateBase",
+									title: value ? "启用中..." : "关闭中...",
+									data: {
+										_id: row._id,
+										enable: value
+									},
+									success: data => {
+										change(value); // 这一步是让表格行内的开关改变显示状态
+									}
+								});
+							}
 						},
-						{ key:"hidden_menu", title:"是否隐藏", type:"tag", defaultValue:false,
-							data:[
-								{ value:true, label:"隐藏", tagType:"danger" },
-								{ value:false, label:"显示", tagType:"success" },
-							]
+						{
+							key: "hidden_menu", title: "是否显示", type: "switch",
+							activeValue: false,
+							inactiveValue: true,
+							width: 80,
+							watch: (res) => {
+								let { value, row, change } = res;
+								vk.callFunction({
+									url: "admin/system/menu/sys/updateBase",
+									title: "请求中...",
+									data: {
+										_id: row._id,
+										hidden_menu: value
+									},
+									success: data => {
+										change(value); // 这一步是让表格行内的开关改变显示状态
+									}
+								});
+							}
 						},
-						{ key:"sort", title:"排序值", type:"number", width:120 },
+
 						{ key:"parent_id", title:"父级菜单Id", type:"text", width:250, align:"left" },
 					],
 					// 多选框选中的值
@@ -221,6 +267,9 @@
 			init(options) {
 				originalForms["form1"] = vk.pubfn.copyObject(that.form1);
 			},
+			tableSuccess(){
+				this.pluginMenus = this.getPluginMenus();
+			},
 			// 页面跳转
 			pageTo(path) {
 				vk.navigateTo(path);
@@ -231,7 +280,7 @@
 			},
 			// 搜索
 			search(){
-				that.$refs.table1.query();
+				that.$refs.table1.search();
 			},
 			// 刷新
 			refresh(){
@@ -301,7 +350,39 @@
 			addMenuByJsonBtn(){
 				let item = that.getCurrentRow();
 				vk.pubfn.openForm('addMenuByJson',{ item });
-			}
+			},
+			// 修改排序值
+			sortChange(sort, item){
+				vk.callFunction({
+					url: 'admin/system/menu/sys/updateBase',
+					data: {
+						_id: item._id,
+						sort: Number(sort)
+					},
+					success: (data) => {
+
+					}
+				});
+			},
+			addPluginMenuMenu(){
+				vk.pubfn.openForm('addPluginMenu',{ pluginMenus: this.pluginMenus });
+			},
+			getPluginMenus() {
+				const menus = [];
+				const tableData = this.$refs.table1.getTableData() || [];
+				const dbMenus = vk.pubfn.treeToArray(tableData, {
+					id:"menu_id",
+					parent_id:"parent_id",
+					children:"children"
+				});
+				pluginMenuJsons.forEach(menu => {
+					// 查找尚未被注册到数据库中的菜单
+					if (!dbMenus.find(item => item.menu_id === menu.menu_id)) {
+						menus.push(menu);
+					}
+				})
+				return menus;
+			},
 		},
 		// 监听属性
 		watch: {

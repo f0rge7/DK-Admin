@@ -191,7 +191,7 @@
 								httpRequest(obj) {
 									// let { action, file, filename, data, headers, onProgress, onSuccess, onError } = obj;
 									// 获取文件类型(image:图片 video:视频 other:其他)
-									this.$utils.upload(
+									this.utils.upload(
 										"/upload/", obj
 									).then(res => {
 										if (res) that.form1.data.image.push(res)
@@ -252,7 +252,7 @@
 					}
 				}
 				
-				await this.$utils.post(
+				await this.utils.post(
 					"/call/", data
 				).then(resp => {
 					console.log(resp)
@@ -352,7 +352,7 @@
 					proc: "cloud_sp_bonus_mall",
 					data: that.form1.data
 				}
-				await this.$utils.post(
+				await this.utils.post(
 					"/call/", data
 				).then(res => {
 					// console.log(res)

@@ -1,3 +1,377 @@
+## 2.23.1（2026-03-20）
+- 【重要】项目使用 `Prettier` 进行统一代码格式化 [传送门](https://vkdoc.fsq.pub/client/codeFormat.html)
+- 【调整】`router/service/plugs/baidu/` 为云对象方式实现
+- 【调整】云函数 `admin/select/kh/user` 移动到 `admin/system/user/kh/select`，废弃 `admin/select/` 目录
+- 【优化】完善 `dao/base.js` 的注释，方便 AI 使用 dao 层操作数据库
+- 【优化】移除过时的示例代码，避免干扰 AI
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.23.0（2026-03-20）
+- 【重要】项目使用 `Prettier` 进行统一代码格式化 [传送门](https://vkdoc.fsq.pub/client/codeFormat.html)
+- 【调整】`router/service/plugs/baidu/` 为云对象方式实现
+- 【调整】云函数 `admin/select/kh/user` 移动到 `admin/system/user/kh/select`，废弃 `admin/select/` 目录
+- 【优化】完善 `dao/base.js` 的注释，方便 AI 使用 dao 层操作数据库
+- 【优化】移除过时的示例代码，避免干扰 AI
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.22.2（2026-03-03）
+* 【修复】dao2.0 版本会有循环依赖的问题
+* 【修复】hbx 4.87 版本导入插件会有两个uniCloud目录的问题
+
+**特别注意：本次更新需要替换框架内置文件**
+
+- 替换文件 `router/dao/base.js`
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.22.1（2026-02-11）
+* 【优化】router 内的定时任务支持设置并发执行数，参数名 concurrency [传送门](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/timer.html)
+* 【优化】绑定新手机号和绑定新邮箱的业务逻辑
+
+**特别注意：本次更新需要替换框架内置文件**
+
+- 替换文件 `/router/service/user/kh/bindNewEmail.js`
+- 替换文件 `/router/service/user/kh/bindNewMobile.js`
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.22.0（2026-02-07）
+* 【重要】移除 `db_init.json` 单一文件，将其拆分为多文件结构并补全完整表结构，采用新版数据库初始化方案（通过右键 database 目录完成数据库初始化操作）
+* 【重要】Dao 文件升级为 Dao2.0 版本 [传送门](https://vkdoc.fsq.pub/client/uniCloud/db/dao.html)
+* 【新增】websocket新增isAlive，检测连接是否存活 [传送门](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/websocket.html#cloud-is-alive)
+* 【新增】任意页面传token参数实现自动登录 [传送门](https://vkdoc.fsq.pub/client/vk.userCenter.html#handleautologintoken)
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.21.0（2026-01-30）
+* 【重要】`router` 函数支持以定时任务方式运行 [传送门](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/timer.html)
+* 【修复】websocket 连接管理，部分情况下连接无法删除的问题
+* 【修复】函数根目录是 pub kh sys 时，无法调用的问题
+* 【修复】`vk.pubfn.formValidate` 在检测 `min:0` 时不生效的问题
+* 【新增】`vk-ws-connection` 表新增 `space_id`、`provider`、`ip` 字段
+* 【新增】`vk.sendSms` 等价于 `vk.system.smsUtil.sendSms` [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/sms.html)
+* 【优化】`vk.sendSms` 新增参数 `phoneList` 支持批量发送短信（一次最多50个手机号码）[传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/sms.html)
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.20.3（2025-12-09）
+* 【新增】鸿蒙App端新增华为账号一键登录功能 [传送门](https://vkdoc.fsq.pub/client/vk.userCenter.html#loginbyhuaweiphonenumber)
+* 【优化】连表查询时，副表新增 localKeyIndex 属性，可实现副表按主表外键的索引顺序排序功能 [传送门](https://vkdoc.fsq.pub/client/uniCloud/db/selects.html#scene5)
+* 【修复】`vk.baseDao.getTableData` 模糊查询时，模糊查询无法查询 `* + ?` 等特殊符号的问题
+* 【修复】`vk.baseDao.getTableData` 模糊查询时，新增属性 `ignoreCase`，如设置为 true，可忽略大小写，默认为 true
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.20.2（2025-11-07）
+* 【修复】vk.pubfn.snake2camelJson、vk.pubfn.camel2snakeJson 函数不支持深层嵌套转换的问题
+* 【优化】绑定微信逻辑细节（需替换框架内置目录 `/router/service/user/util`）
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.20.0（2025-09-26）
+* 【重要】新增中间件 loginFilter，可控制开启或关闭登录注册相关接口
+* 【新增】vk.userCenter.closeAccount 注销账号 [传送门](https://vkdoc.fsq.pub/client/vk.userCenter.html#closeaccount)
+* 【新增】vk.userCenter.openAccount 恢复账号（仅限未二次确认注销时）[传送门](https://vkdoc.fsq.pub/client/vk.userCenter.html#openaccount)
+* 【新增】vk.userCenter.getCoolingStatus 获取注销冷静期状态 [传送门](https://vkdoc.fsq.pub/client/vk.userCenter.html#getcoolingstatus)
+* 【修复】vk.updateManager.updateReady 在不支持的小程序平台运行时会报错的问题
+* 【修复】发送短信时可能会报签名错误的问题
+* 【优化】vk.pubfn.formValidate 支持属性 pattern
+* 【优化】通过邮箱、手机号重置密码时，保留当前操作用户的token
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.19.9（2025-07-07）
+* 【重要】新增 API vk.navigateToLuckyDraw，可跳转到抽奖活动小助手实现抽奖功能 [传送门](https://vkdoc.fsq.pub/vk-lucky-draw/)
+* 【修复】支付宝云内置数据库绑定邀请码会报错的问题
+* 【修复】微信多App登录时报错的问题
+* 【新增】云端请求限流策略，适合用于限制用户操作频率，防止用户高频请求某个接口 [传送门](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/rateLimit.html)
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.19.8（2025-05-23）
+* 【优化】去除微信小程序平台上提示 uni.getSystemInfoSync 过期的警告问题
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.19.7（2025-04-08）
+* 【重要】增强邀请码随机能力，解决在支付宝云下邀请码会连续10次都重复，导致生成邀请码失败的问题
+* 【调整】邀请码从8位数调整为7位数，因为微信小程序码最大32位字符串，24（_id）+1（分割符号）+7（邀请码）=32
+* 【修复】`vk.crypto.aes.encrypt` 在加密正确的情况下，解密会返回null的问题
+* 【新增】日志打印模式新增折叠模式，可在 `app.config.js` 内设置 `logger.mode` 为 1 开启默认折叠
+* 【优化】登录日志增加 `device_id`
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.19.6（2025-03-14）
+* 【修复】2.19.4版本引出的当设置了 retryCount 时，loading 可能无法被正常关闭的问题
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.19.5（2025-03-13）
+* 【修复】2.19.4 版本引出的 loading 显示和关闭的时机错误问题
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.19.4（2025-03-11）
+* 【调整】websocket 在非 uniapp 端建立链接时，默认使用非加密策略
+* 【修复】非中英文客户端可能触发语言包缺失的异常问题
+* 【新增】前端新增API `vk.setCustomClientInfo()` [传送门](https://vkdoc.fsq.pub/client/pages/updateRequestGlobalParam.html#set-custom-client-info)
+* 【新增】云端云对象新增API `this.getCustomClientInfo()` [传送门](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/cloudObject.html#get-custom-client-info)
+* 【新增】vk.pubfn.test 新增支持域名格式合法性校验功能
+* 【优化】uni-id-users 表的 inviter_uid 字段索引修改为 array 类型，兼容支付宝云规范
+* 【优化】opendb-app-versions 表的 platform 字段索引修改为 array 类型，兼容支付宝云规范
+* 【优化】同时发起多个 vk.callFunction 请求时的 loading 状态处理，loading 将在所有请求完成后再统一关闭，避免中途消失问题，提升用户体验
+* 【优化】vk.request 新增 useProxy 参数，当设为 true 时，在阿里云云开发环境中请求将自动通过代理服务器发送
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.19.3（2025-01-22）
+* 【修复】运行报错 'localStorage' has already been declared 的问题
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.19.2（2025-01-21）
+* 【新增】微信小程序平台发货管理和物流助手API [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/weixin.html#order)
+* 【新增】苹果账号登录 [传送门](https://vkdoc.fsq.pub/client/vk.userCenter.html#loginbyapple)
+* 【调整】登录注册返回值因已存在 `vk_uni_token` 字段，故去除 `token` 和 `tokenExpired` 字段（这两个字段已在 `vk_uni_token` 中）
+* 【调整】邀请码位数从6位调整为8位
+* 【优化】中间件 `onActionExecuted` 新增 `returnMode` 可设置返回值模式 0：使用Object.assign合并 1：完全替换，默认为0 [传送门](https://vkdoc.fsq.pub/client/uniCloud/middleware/filter.html#return-mode)
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.19.0（2024-12-19）
+* 【重要】支持编译到鸿蒙App和鸿蒙元服务 [前往uni-app鸿蒙App专题](https://uniapp.dcloud.net.cn/tutorial/harmony/runbuild.html) [前往uni-app鸿蒙元服务专题](https://uniapp.dcloud.net.cn/tutorial/mp-harmony/intro.html)
+* 【重要】新增华为登录等相关接口 [传送门](https://vkdoc.fsq.pub/client/vk.userCenter.html#huawei)
+* 【修复】vk.baseDao.selects 连表时，当主表设置fieldJson仅存在_id时，连表的as字段不显示的问题
+* 【优化】以下函数的性能 `vk.pubfn.getData` `vk.pubfn.setData` `vk.pubfn.isNull` `vk.pubfn.isNotNull`
+## 2.18.19（2024-10-18）
+* 【重要】修复第三方授权登录，如微信登录时，特殊情况下会导致账号虽然存在，但登录后一直是新注册账号的问题
+
+**特别注意**
+
+* 本次更新需要替换项目的 `/router/service/user/` 目录
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.18.18（2024-10-17）
+* 【调整】注册接口统一去除 `myInviteCode` 参数，使用自动生成，防止出现重复的 `myInviteCode`
+* 【修复】`vk.pubfn.test` 在检测图片和视频时未忽略大小写的问题
+* 【新增】内置全局异常过滤器 `errorFilter`，支持将错误信息写入数据库方便搜索排错等等
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.18.17（2024-09-04）
+* 【重要】修复 `vk.baseDao.select` 因 `2.18.13` 更新引出的当 `pageSize设置为-1或>1000` 时，可能出现查询结果不准确的问题
+* 【修复】`vk.request` 当设置 `responseType: 'arraybuffer'` 时，部分情况下无法正常接受到值的问题
+* 【优化】`vk.callFunction` 设置 `loading:true`，在请求时马上跳页面，loading参数设置不准确的问题
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.18.16（2024-08-27）
+* 【修复】调整云对象内置的过滤器 _before，执行 return json对象时，对象内属性丢失的问题
+* 【优化】支付宝空间的数据库索引字段数据类型
+* 【优化】vk.vuex.getters 支持传参
+* 【优化】websocket支持通过device_id发送消息
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.18.15（2024-08-20）
+* 【修复】vk.request 部分情况下报错的问题（此问题会导致微信登录报错）
+* 【修复】weixin-js-sdk.js 在ssr方式编译时会报错的问题
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.18.14（2024-08-20）
+* 【修复】`vk.callFunction` 若设置了 `retryCount` 属性后，`let res = await vk.callFunction` 无法取到值的问题
+* 【优化】`vk.callFunction` 新增 `timeout` 属性，可以单独控制某个请求的超时时间了（不能大于云函数最大超时时间，实际生效需等HBX发新版支持）
+* 【优化】微信登录数据库可能会报慢查询的问题
+* 【优化】使用微信PC网站登录、微信公众号登录、微信APP首次登录（即注册）成功后将自动获取昵称和头像（微信小程序由于微信限制，无法直接获取）
+
+**特别注意**
+
+* 本次更新需要替换项目的 `/router/service/user/` 目录
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.18.13（2024-08-12）
+* 【重要】新增支付宝云websocket [传送门](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/websocket.html)
+* 【新增】表 vk-ws-connection 用于记录当前正在连接的websocket相关信息 [传送门](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/websocket.html#%E5%85%B3%E8%81%94%E7%9A%84%E6%95%B0%E6%8D%AE%E8%A1%A8)
+* 【新增】微信PC网站扫码登录，示例页面 `/pages_template/uni-id/weixin/pc-weixin` [传送门](https://vkdoc.fsq.pub/client/vk.userCenter.html#%E5%BE%AE%E4%BF%A1pc%E7%BD%91%E7%AB%99%E6%89%AB%E7%A0%81%E7%99%BB%E5%BD%95)
+* 【修复】前端云对象的权限权重判断与云端判断逻辑不一致的问题 [传送门](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/cloudObject.html#%E5%86%85%E7%BD%AE%E6%9D%83%E9%99%90)
+* 【优化】vk.navigateToLogin 支持配置登录成功后返回的页面等功能 [传送门](https://vkdoc.fsq.pub/client/jsapi.html#vk-navigatetologin)
+* 【优化】vk.pubfn.batchRun 内部逻辑，提升并发性能 [传送门](https://vkdoc.fsq.pub/client/jsapi.html#vk-pubfn-batchrun)
+* 【优化】vk.baseDao.select 不再并发查询数据库，避免数据库连接数飙升 [传送门](https://vkdoc.fsq.pub/client/uniCloud/db/api.html#vk-basedao-select-%E6%9F%A5%E5%A4%9A%E6%9D%A1%E8%AE%B0%E5%BD%95-%E5%85%B7%E6%9C%89%E5%88%86%E9%A1%B5%E5%8A%9F%E8%83%BD)
+* 【优化】云端 vk.request 默认打开自动重定向功能 [传送门](https://vkdoc.fsq.pub/client/jsapi.html#vk-request-%E4%BA%91%E7%AB%AF%E8%B0%83%E7%94%A8)
+
+**特别注意**
+
+* 本次更新需要替换项目的 `/router/service/admin/system_uni/ws-connection/` 目录
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.18.12（2024-07-19）
+* 【修复】云端上传文件会报 `this._publicHandle is undefined` 的问题
+* 【优化】当微信或抖音在 `uni-config-center/vk-unicloud/index.js` 内已经设置了多小程序登录时，uni-id的配置即使未配置也能登录了
+* 【优化】框架内部使用 `crypto.createCipheriv` 代替 `crypto.createCipher`（crypto.createCipher在高版本node.js环境中会报已废弃的警告）
+* 【优化】loginByToken 内部细节
+
+**特别注意**
+
+* 本次更新需要替换项目的 `/router/service/user/` 目录
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.18.11（2024-07-17）
+* 【修复】getUploadFileOptionsForExtStorage 会报 bucketName 必填的错误的问题
+* 【修复】vk.openapi.weixin.decrypt.getPhoneNumber 使用参数 code 的方式时，多小程序调用不生效的问题
+* 【优化】loginByToken 内部逻辑
+
+**特别注意**
+
+* 本次更新需要替换项目的 `/router/service/user/` 目录
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.18.9（2024-07-02）
+* 【修复】因 `2.18.8` 更新导致的APP本机号码一键登录会报错的问题
+* 【优化】`router/service/user/util/loginUtil.js` 内部细节
+
+**特别注意**
+
+* 本次更新需要替换完整框架项目的 `/router/service/user/` 目录
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.18.8（2024-07-01）
+* 【重要】`vk.userCenter` 新增抖音登录、绑定抖音、解绑抖音、抖音手机号授权登录等API [传送门](https://vkdoc.fsq.pub/client/vk.userCenter.html#%E6%8A%96%E9%9F%B3)
+* 【重要】新增云端 `vk.login` 万能授权登录API，可参考云函数 `user/pub/loginByDouyin` 实现任意第三方授权登录 [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/login.html)
+* 【调整】`pub类型` 云函数获取 userInfo 的参数 `need_user_info` 调整为 `needUserInfo`（同时兼容这2个参数）
+* 【修复】请求多服务空间使用方式二的情况下支付宝云会报错的问题 [传送门](https://vkdoc.fsq.pub/client/question/q9.html#%E6%96%B9%E5%BC%8F%E4%BA%8C)
+* 【优化】当 `tokenMaxLimit` 设置为1时，强制 `needUserInfo` 为 `true`（此时访问非pub函数就会达到同一个账号只能一台设备登录的效果）
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.18.7（2024-06-19）
+* 【重要】客户端与云函数支持双向加密通信 [传送门](https://vkdoc.fsq.pub/client/pages/callFunction.html#encrypt-%E5%8A%A0%E5%AF%86%E9%80%9A%E4%BF%A1)
+* 【优化】扩展存储上传成功额外返回 extendInfo [传送门](https://vkdoc.fsq.pub/client/pages/uploadFile.html#%E8%BF%94%E5%9B%9E%E5%80%BC)
+* 【优化】新增 vk.userCenter.loginByToken 接口 [传送门](https://vkdoc.fsq.pub/client/vk.userCenter.html#vk-usercenter-loginbytoken-%E5%88%B7%E6%96%B0token)
+* 【优化】微信公众号jsapi在ios端上的兼容性
+## 2.18.6（2024-06-04）
+* 【重要】支持海外全球加速访问 [传送门](https://vkdoc.fsq.pub/client/globalAccelerate.html)
+* 【重要】`vk.uploadFile` 支持在云端调用，同时支持 `内置存储` 和 `扩展存储` [前端传送门](https://vkdoc.fsq.pub/client/pages/uploadFile.html) [云端传送门](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/uploadFile.html)
+* 【修复】中间件 `addAdminLog` 在云对象请求结束后可能获取不到 `userInfo` 的问题
+* 【优化】`vk.request` 请求 router 的url化地址时，新增参数 clientInfo 若设置为 true，会自动提交 clientInfo 信息到请求头，方便云函数和云对象能够获取到相关信息
+## 2.18.5（2024-05-28）
+* 【修复】保留vk.init函数，兼容性老项目使用最新版核心库
+## 2.18.4（2024-05-24）
+* 【修复】iOS手机首次安装并运行APP时可能会报错的问题
+## 2.18.3（2024-05-20）
+* 【调整】删除2.18.2更新的d.ts文件，内置到 `VK框架快速开发辅助工具` [传送门](https://vkdoc.fsq.pub/client/codeAssist.html#_14%E3%80%81%E5%BC%80%E5%90%AFvk%E6%A1%86%E6%9E%B6d-ts%E8%AF%AD%E6%B3%95%E6%8F%90%E7%A4%BA)
+## 2.18.2（2024-05-17）
+* 【重要】新增 `d.ts` 语法提示，提升开发体验 [传送门](https://vkdoc.fsq.pub/client/codeTips.html#d-ts-%E8%AF%AD%E6%B3%95%E6%8F%90%E7%A4%BA)
+* 【重要】修复 `HBX版本 >= 4.14` 时运行项目到 `Vue3` 时会报错的问题
+* 【优化】内置的微信小程序获取 `access_token` 的接口改为稳定版接口 [传送门](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/mp-access-token/getStableAccessToken.html)
+
+**特别注意**
+
+* 本次更新需要替换项目根目录下的 `store/index.js` 文件
+## 2.18.1（2024-04-26）
+* 【重要】云函数的 node.js 版本统一调整为 node16（阿里云已宣布node8不再维护）
+* 【重要】新增 vk.getReentrantLockManage 高并发分布式重入锁，主要用于控制云函数或云对象并发访问时的同步，确保同一时间只有一个线程或进程能够拿到锁。 [传送门](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/reentrantLock.html)
+* 【重要】新增 vk.getCacheManage 缓存管理2.0版本，新版云端数据缓存同时支持空间内置数据库和Redis数据库，用户可以根据需求选择合适的存储方式。 [传送门](https://vkdoc.fsq.pub/client/uniCloud/cache/cache.html)
+* 【修复】vk.baseDao.selects 的 treeProps 内的 addFields 不生效的问题
+* 【调整】vk.request 的默认时间调整为60秒
+* 【优化】vk.navigateToLogin 新增 redirectUrl 参数，用于登录成功后是否返回当前页面或指定页面
+* 【优化】vk.pubfn.getFileSuffix 返回值统一转小写
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.18.0（2024-04-24）
+* 【重要】云函数的 node.js 版本统一调整为 node16
+* 【重要】新增 vk.getReentrantLockManage 高并发分布式重入锁，主要用于控制云函数或云对象并发访问时的同步，确保同一时间只有一个线程或进程能够拿到锁。 [传送门](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/reentrantLock.html)
+* 【重要】新增 vk.getCacheManage 缓存管理2.0版本，新版云端数据缓存同时支持空间内置数据库和Redis数据库，用户可以根据需求选择合适的存储方式。 [传送门](https://vkdoc.fsq.pub/client/uniCloud/cache/cache.html)
+* 【优化】vk.navigateToLogin 新增 redirectUrl 参数，用于登录成功后是否返回当前页面或指定页面
+* 【优化】vk.pubfn.getFileSuffix 返回值统一转小写
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.17.5（2024-03-14）
+* 【修复】因 `2.17.4` 更新导致的 `vk.baseDao.selects` 执行树形结构查询时无法连表的问题
+* 【优化】其他细节
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.17.4（2024-02-23）
+* 【重要】支付宝小程序云支持地理位置查询，需要先创建地理位置索引（HBX版本4.01的alpha版支持本地运行，3.99的正式版只能云端运行）
+* 【修复】`vk.baseDao.selects` 执行树形结构查询时，在支付宝小程序云中表现不一致的问题
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.17.3（2024-02-14）
+* 【修复】因 `2.17.2` 引起的 `vk.baseDao.select` 的 `getOne: true` 时会报错的问题
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.17.2（2024-02-01）
+* 【调整】`vk.baseDao.getTableData` 的参数 `getCount` 的默认值为 `true`，但若含有 `lastWhereJson` 或 `lastSortArr` 则默认值为 `false`（兼顾性能和实用性）
+* 【调整】`vk.baseDao.selects` 、 `vk.baseDao.getTableData` 将 `addFields` 的执行顺序调整到 `fieldJson` 之前
+* 【优化】`vk.baseDao.select`、`vk.baseDao.selects`、`vk.baseDao.getTableData` 新增返回值 `getCount`，表示是否同时执行了 `count` 请求 [传送门](https://vkdoc.fsq.pub/client/uniCloud/db/selects.html#getcount)
+* 【优化】`vk.baseDao.select`、`vk.baseDao.selects`、`vk.baseDao.getTableData` 新增参数 `debug`，传 `true` 会返回执行rows和count的数据库语句执行耗时，单位毫秒，方便优化数据库语句
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.17.1（2024-01-04）
+* 【修复】支付宝小程序云环境下，部分情况下查询树状结构子节点数据没有获取到数据的问题
+* 【修复】地理位置查询时，部分情况下获取到的 total 不准确的问题
+* 【优化】`vk.uploadFile` 当needSave为true但file.name为空时, 自动从cloudPath中获取name
+* 【优化】APP本机号码一键登录密钥调整为非必填
+* 【优化】前端 `main.js` 移除 `vk.init` 代码（不再需要手动init）
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.17.0（2023-12-27）
+* 【重要】`vk.uploadFile` 支持扩展存储-七牛云 [传送门](https://vkdoc.fsq.pub/client/pages/uploadFile.html#%E4%B8%8A%E4%BC%A0%E6%89%A9%E5%B1%95%E5%AD%98%E5%82%A8)
+* 【修复】`vk.pubfn.timeFormat` 在抖音小程序真机调试报错的问题
+* 【优化】中间件运行报错时提示报错的中间件的名称和id
+* 【优化】`vk.callFunction` 支持参数 secretType
+* 【优化】发送短信的密钥调整为非必填
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.16.1（2023-11-06）
+* 【修复】vk实例对象在非router类型的云函数中运行 `vk.crypto.aes.decrypt` 可能报解密失败的问题。
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.16.0（2023-10-27）
+* 【重要】新增 `微信公众号jsapi` 相关接口，可实现微信公众号的快速开发。[传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/weixin-h5-jsapi.html)
+* 【新增】`vk.notifyEventReady(eventName, data)` 通知特定事件已准备就绪，并将数据传递给awaitEventReady注册的回调函数。一定会在 awaitEventReady 函数被调用之前触发。[传送门](https://vkdoc.fsq.pub/client/jsapi.html#vk-notifyeventready)
+* 【新增】`vk.awaitEventReady(eventName, callback)` 等待特定事件执行后再执行相应的回调函数，如果事件已准备就绪，它会立即执行回调函数；否则，它将等待事件notifyEventReady后再执行。
+* 【优化】`vk.baseDao.add` 不再修改传入的 `dataJson` 参数的值（数据库里依然会自动添加 `_add_time` 字段）
+* 【重要】调整 `vk.baseDao.getTableData` 的 `whereJson` 实现逻辑，使之更符合实际开发需求（现在强制条件不会覆盖前端条件，而是一起进行and条件）
+
+关于 `vk.baseDao.getTableData` 的 `whereJson` 的调整说明
+
+- 调整前：whereJson如果写的 `time > 100`，则即使前端传了 `time > 1000`，最终where条件也还是 `time > 100`（即在强制条件内的字段条件被固定死了）
+- 调整后：whereJson如果写的 `time > 100`，而前端传了 `time > 1000`，最终where条件是 `time > 100 and time > 1000`（依然有强制条件的效果，但更灵活了，前端能在强制条件范围内自由查询）
+
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.15.3（2023-09-25）
+* 【修复】`短信发送` 接口当uni-id配置成多端隔离（数组形式）会报错的bug
+* 【修复】`vk.importObject` 部分情况下会报错的问题
+* 【优化】如果当前运行的微信小程序是体验版，但没有点HBX的【发行】菜单发布，则提示开发者请点【发行】按钮
+* 【优化】`$hasRole`函数的功能 [传送门](https://vkdoc.fsq.pub/client/jsapi.html#hasrole)
+* 【优化】`vk.pubfn.timeFormat` 支持显示时区，完整格式为 `yyyy-MM-ddThh:mm:ssZ`
+* 【优化】其他细节
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.15.2（2023-08-15）
+* 【重要】新增地图相关的API [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/map.html)
+* 【修复】`vk.baseDao.sample` 在腾讯云空间最大只能取20条的bug
+* 【优化】`vk.pubfn.test` 新增参数 `allowEmpty` 控制是否允许为空 [传送门](https://vkdoc.fsq.pub/client/jsapi.html#vk-pubfn-test-%E6%A3%80%E6%B5%8B%E6%96%87%E6%9C%AC%E6%A0%BC%E5%BC%8F)
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.15.1（2023-07-20）
+* 1、【重要】为了安全性考虑，调整前端的 `vk.request` API，需要手动指定 `uniIdToken: true` 才会在请求头中自动添加 `uni-id-token`
+* 2、【优化】前端 `vk.request` 当满足响应规范时，会自动保存 `token` 和 `userInfo` 以及token失效跳登录页面
+* 3、【优化】新增 `vk.baseDao.setById`（根据ID判断存在则修改，不存在则添加，此为原子操作，非查询再判断）
+* 4、【优化】`user/pub/sendEmailCode` 发送邮件验证码新增针对同一个邮箱每天的次数限制（默认30次，可在函数内修改默认次数）
+* 5、【优化】`user/pub/sendSmsCode` 发送短信验证码新增针对同一个手机号每天的次数限制（默认12次，可在函数内修改默认次数）
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.15.0（2023-07-04）
+* 1、【重要】注册接口统一去除前端的role参数（需替换目录 `router/service/user/pub`）
+* 2、【修复】云端表单验证不支持a.b的问题
+* 3、【新增】`vk.sessionStorage` 本地会话缓存，仅h5可用
+* 4、【优化】`vk.uploadFile` 新增参数 `cloudPathAsRealPath` 默认为true，代表支持阿里云目录
+* 5、【优化】`vk.uploadFile` 新增参数 `cloudDirectory` 可以设置上传至指定的云端目录 
+* 6、【优化】`vk.request` 新增 `interceptor` 参数（该参数仅前端调用时生效）[传送门](https://vkdoc.fsq.pub/client/jsapi.html#vk-request-%E8%AF%B7%E6%B1%82http%E6%8E%A5%E5%8F%A3)
+* 7、【优化】发送邮件验证码新增参数判断
+* 8、【优化】云函数、云对象404时的错误提示
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.14.3（2023-06-09）
+* 1、【新增】支付宝小程序api [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/alipay.html)
+* 2、【修复】因 `2.14.2` 更新导致的支付宝小程序报错问题。
+* 3、【优化】注册接口前端全局防抖
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.14.2（2023-06-01）
+* 1、【优化】`user/kh/addUploadRecord` 细节
+* 2、【优化】`vk.importObject` 支持 `importObjectOptions` 参数 [传送门](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/cloudObject.html#uni-vk-importobject%E7%9A%84%E9%AB%98%E7%BA%A7%E7%94%A8%E6%B3%95)
+* 3、【优化】vuex模块化支持多级目录
+* 4、【优化】微信公众号登录后不能跳回登录前页面的问题。
+* 5、【调整】`vk.pubfn.test(str, 'username')` 检测的长度调整为3-32位
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.14.1（2023-05-17）
+* 1、【新增】QQ小程序API [详情](https://vkdoc.fsq.pub/client/uniCloud/plus/qq.html#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)
+* 2、【新增】抖音小程序API [详情](https://vkdoc.fsq.pub/client/uniCloud/plus/douyin.html)
+* 3、【优化】`vk.pubfn.formValidate` [详情](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/formRules.html#rules%E8%AF%A6%E8%A7%A3)
+* 4、【优化】`vk.crypto.aes.encrypt` 和 `vk.crypto.aes.decrypt` 新增 `mode` 参数，支持切换为加密算法，方便兼容java、php等后端语言加解密 [详情](https://vkdoc.fsq.pub/client/uniCloud/cloudfunctions/crypto.html#%E5%9C%A8%E4%BA%91%E5%87%BD%E6%95%B0%E5%8A%A0%E5%AF%86-java%E6%88%96php%E7%AD%89%E5%85%B6%E4%BB%96%E5%90%8E%E7%AB%AF%E8%AF%AD%E8%A8%80%E8%A7%A3%E5%AF%86)
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.13.6（2023-04-23）
+* 1、【优化】`vk.baseDao.selects` 当getCount为false时，hasMore永远是false的bug
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.13.5（2023-03-20）
+* 1、【优化】一些细节
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.13.4（2023-02-12）
+* 1、【修复】云函数内调用 `vk.callFunction` 可能会报错的bug
+* 2、【修复】微信公众号万能API不支持上传媒体图片的问题 [传送门](https://vkdoc.fsq.pub/client/uniCloud/plus/weixin-h5.html#%E5%A6%82%E4%BD%95%E8%B0%83%E7%94%A8%E4%B8%8A%E4%BC%A0%E4%B8%B4%E6%97%B6%E7%B4%A0%E6%9D%90%E6%8E%A5%E5%8F%A3)
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.13.3（2023-02-05）
+* 1、【优化】一些细节
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
+## 2.13.2（2023-01-19）
+* 1、【调整】router云函数运行内存调整为512M（实测512M即可达到最优性能）
+* 2、【新增】微信最新版头像和昵称获取示例，详见：/pages_template/uni-id/weixin/set-user-info.vue
+* 3、【优化】升级微信小程序文本检测API `vk.openapi.weixin.security.msgSecCheck` 至2.0版本 [传送门 - 微信文档](https://developers.weixin.qq.com/miniprogram/dev/OpenApiDoc/sec-center/sec-check/msgSecCheck.html)
+* 4、【修复】`微信公众号万能API调用接口` 在调用部分接口时可能会报错的问题
+* 完整框架项目地址：`https://ext.dcloud.net.cn/plugin?id=2204`[点击查看](https://ext.dcloud.net.cn/plugin?id=2204)
 ## 2.13.1（2022-12-29）
 * 1、【调整】url化后token的请求头从 `uni_id_token` 改为 `uni-id-token`（新版阿里云不支持 `uni_id_token` 请求头）
 * 2、【修复】`vk.openapi.weixin.h5.request` 接口无法在阿里云空间中自动使用代理的问题。

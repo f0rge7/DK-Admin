@@ -47,25 +47,22 @@ export default {
 					vk.setVuex("$user.userInfo", data.userInfo);
 					vk.setVuex("$user.permission", data.userInfo.permission);
 					
-					vk.setVuex("$user.logo1", data.userInfo.logo1);
-					vk.setVuex("$user.logo2", data.userInfo.logo2);
-					vk.setVuex("$user.server_ip", data.userInfo.server_ip);
-					// 获取后台token
-					let params = {
-						"empno": "admin",
-						"password": data.userInfo.admin_pwd,
-						"shop_id": "0000"
+					let data1 = {
+						proc: 'cloud_sp_basedata',
+						data: {
+							type: 'BASE'
+						}
 					}
 					
-					that.$utils.post(
-						"/login/account/", params
+					that.utils.post(
+						"/call/", data1, false
 					).then(resp => {
-						// console.log(resp)
-						// 存储token
-						if ("token" in resp) {
-							uni.setStorageSync("token", resp.token)
-							// vk.setVuex("$user.token", resp.token);
+						if (resp.code == 200) {
+							vk.setVuex("$app.baseData", resp.data);
+							// uni.setStorageSync('departments', this.utils.arrayToTree(resp.data['部门'], {value: 'value', name: 'text', children: 'children'}))
 						}
+					}).catch(err => {
+						console.log(err)
 					})
 				}
 			});

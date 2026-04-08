@@ -1,5 +1,151 @@
 /* 这里是你自己写的全局css样式 */
 
+.d-flex {
+	display: flex;
+}
+
+.flex-column {
+	-ms-flex-direction: column !important;
+	flex-direction: column !important;
+}
+
+.justify-content-start {
+	justify-content: flex-start;
+}
+
+.justify-content-end {
+	justify-content: flex-end;
+}
+
+.justify-content-between {
+	justify-content: space-between;
+}
+
+.just-content-center {
+	justify-content: center;
+}
+
+.justify-content-evenly {
+	justify-content: space-evenly !important;
+}
+
+.just-content-around {
+	justify-content: space-around;
+}
+
+.align-items-normal {
+	align-items: normal;
+}
+
+.align-items-start {
+	align-items: flex-start;
+}
+
+.align-items-end {
+	align-items: flex-end;
+}
+
+.align-items-center {
+	align-items: center;
+}
+
+.align-items-between {
+	align-items: space-between;
+}
+
+.align-items-around {
+	align-items: space-around;
+}
+
+.align-items-stretch {
+	align-items: stretch;
+}
+
+.align-items-baseline {
+	-ms-flex-align: baseline !important;
+	align-items: baseline !important;
+}
+
+.w-100 {
+	width: 100% !important;
+}
+
+.text-left {
+	text-align: left !important;
+}
+
+.text-right {
+	text-align: right !important;
+}
+
+.text-center {
+	text-align: center !important;
+}
+
+// 定义字体(px)单位，小于20都为px单位字体
+@for $i from 9 to 20 {
+	.font-#{$i} {
+		font-size: $i + px;
+	}
+}
+
+// 定义字体(rpx)单位，大于或等于20的都为rpx单位字体
+@for $i from 20 through 40 {
+	.font-#{$i} {
+		font-size: $i + rpx;
+	}
+}
+
+// 定义边缘
+@for $i from 0 through 100 {
+	@each $short, $long in l left, t top, r right, b bottom {
+		// 缩写版，结果如： ml-30
+		// 定义外边距
+		.#{$short}-#{$i} {
+			#{$long}: $i + rpx!important;
+		}
+	}
+}
+
+// 定义内外边距，历遍1-100
+@for $i from 0 through 100 {
+	// 只要双数和能被5除尽的数
+	@if $i % 2 == 0 or $i % 5 == 0 {
+		// 得出：margin-30或者m-30
+		.margin-#{$i}, .m-#{$i} {
+			margin: $i + rpx!important;
+		}
+		
+		// 得出：padding-30或者p-30
+		.padding-#{$i}, .p-#{$i} {
+			padding: $i + rpx!important;
+		}
+		
+		@each $short, $long in l left, t top, r right, b bottom {
+			// 缩写版，结果如： ml-30
+			// 定义外边距
+			.m#{$short}-#{$i} {
+				margin-#{$long}: $i + rpx!important;
+			}
+			
+			// 定义内边距
+			.p#{$short}-#{$i} {
+				padding-#{$long}: $i + rpx!important;
+			}
+			
+			// 完整版，结果如：u-margin-left-30
+			// 定义外边距
+			.margin#{$long}-#{$i} {
+				margin-#{$long}: $i + rpx!important;
+			}
+			
+			// 定义内边距
+			.padding#{$long}-#{$i} {
+				padding-#{$long}: $i + rpx!important;
+			}
+		}
+	}
+}
 /* 滚动条美化方案开始 去掉下方css的注释即可 */
 
 ::-webkit-scrollbar {

@@ -9,9 +9,11 @@
 // 	"token": ""
 // }
 {
-	"url": "https://api.cloudopen.top/data/refresh/",	"method": "POST",
+	"url": "http://221.180.43.34:8088/business/bind/",	"method": "POST",
 	"postData": {
-		"empno": "ADMIN"
+		"terminal_id": "6666",
+		"auth_code": "6666",
+		"client_id": "a896613209497ccc3724b0f9cca84e3f"
 	},
 	"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMjMsInVzZXJuYW1lIjoibzMwMlk1RnF1NDc1TGVNcS1NSXZVQU9feWt0byIsImV4cCI6MTYxODQ2ODc1MCwiZW1haWwiOiIifQ.NG2bJSCdiUp3Khmh5UmZNc4_TUhUyaQztqOpH8Zx56U"
 }

@@ -2,7 +2,7 @@
 	"pages": [
 		{ "path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "大开云平台"
+				"navigationBarTitleText": ""
 			}
 		},
 		{
@@ -32,6 +32,12 @@
 			}
 		},
 		{
+			"path": "pages/screen/screen",
+			"style": {
+				"navigationBarTitleText": "数据大屏"
+			}
+		},
+		{
 			"path": "uni_modules/uni-pay/pages/success/success",
 			"style": {
 				"backgroundColor": "#F8F8F8",
@@ -52,7 +58,7 @@
 				"enablePullDownRefresh": false
 		   }
 		}
-],
+	],
 	"subPackages": [{
 		"root": "pages_plugs",
 		"pages": [
@@ -71,18 +77,28 @@
 			{ "path": "system_uni/vk-components-dynamic" },
 			{ "path": "system_uni/uni-id-files/list" }
 		]
-	}, {
-		"root": "uni_modules/uni-upgrade-center/pages/version",
+	},
+	{
+		"root": "pages/doc",
 		"pages": [
-			{ "path": "list", "style": { "navigationBarTitleText": "版本列表" } },
-			{ "path": "add", "style": { "navigationBarTitleText": "新版发布" } },
-			{ "path": "detail", "style": { "navigationBarTitleText": "版本信息查看" } }
+			{ "path": "cost-price" },
+			{ "path": "price" },
+			{ "path": "order" },
+			{ "path": "order-shop" },
+			{ "path": "entry-order" },
+			{ "path": "entry" },
+			{ "path": "return" },
+			{ "path": "ration" },
+			{ "path": "ration-red" },
+			{ "path": "move" },
+			{ "path": "move-shop" },
+			{ "path": "check" }
 		]
 	}],
 	"globalStyle": {
 		"navigationStyle": "custom",
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "",
+		"navigationBarTitleText": "大开云后台",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},

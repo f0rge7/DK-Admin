@@ -20,9 +20,11 @@
     "license": "MIT",
     "homepage": "https://vkdoc.fsq.pub/admin/",
     "dependencies": {
+        "echarts": "^6.0.0",
         "element-ui": "2.15.7",
+        "html2canvas": "^1.4.1",
         "umy-ui": "1.1.6",
-        "vk-unicloud-admin-ui": "^1.15.22"
+        "vk-unicloud-admin-ui": "^1.23.0"
     },
     "engines": {
         "HBuilderX": "^3.1.10"

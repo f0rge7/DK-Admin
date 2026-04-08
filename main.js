@@ -46,7 +46,10 @@ import '@/common/css/app.scss';
 
 // 引入自定义函数
 import utils from './common/function/utils.js'
-Vue.prototype.$utils = utils
+Vue.prototype.utils = utils
+
+import { exportExcel } from '@/common/utils/exportExcel'
+Vue.prototype.$exportExcel = exportExcel
 
 Vue.config.productionTip = false
 

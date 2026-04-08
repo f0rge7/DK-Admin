@@ -23,7 +23,7 @@ module.exports = {
 		res = await uniID.login({
 			...event.data,
 			// 不指定queryField的情况下只会查询username
-			queryField: ['username', 'email', 'mobile']
+			queryField: ['username', 'email', 'mobile', 'server_ip']
 		});
 		if (res.token) {
 			if (!res.msg) {

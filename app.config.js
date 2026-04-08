@@ -13,6 +13,7 @@ export default {
 	login: {
 		url: "/pages/login/index"
 	},
+	loginPwd: '123456',
 	// 首页页面路径
 	index: {
 		url: '/pages/index/index'

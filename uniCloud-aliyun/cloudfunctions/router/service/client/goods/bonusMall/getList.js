@@ -23,7 +23,7 @@ module.exports = {
 		// 	dbName,
 		// 	data
 		// });
-		await this.$utils.post(
+		await this.utils.post(
 			"/bonus/mall/"
 		).then(res => {
 			console.log(res)

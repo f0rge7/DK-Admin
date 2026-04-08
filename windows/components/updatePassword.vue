@@ -21,7 +21,12 @@
 			:cancel-text="page.cancelText"
 			:submit-text="page.submitText"
 			@success="onFormSuccess"
-		></vk-data-form>
+		>
+			<template v-slot:footer>
+				<el-button @click="form1.props.show = false">关闭</el-button>
+				<el-button type="primary" @click="submit">修改</el-button>
+			</template>
+		</vk-data-form>
 		<!-- 页面主体内容结束 -->
 	</vk-data-dialog>
 </template>
@@ -61,10 +66,10 @@ export default {
 				// 表单属性
 				props: {
 					// 表单请求地址
-					action: "user/kh/updatePwd",
+					action: "",
 					// 表单字段显示规则
 					columns: [
-						{ key: "username", title: "账号", type: "text", disabled:true },
+						{ key: "empno", title: "工号", type: "text", disabled:true },
 						{ key: "oldPassword", title: "原密码", type: "password" },
 						{ key: "newPassword", title: "新密码", type: "password" },
 						{ key: "newPassword2", title: "确认新密码", type: "password" },
@@ -114,8 +119,7 @@ export default {
 			that = this;
 			let { value={} } = that;
 			let { item } = value;
-			let userInfo = vk.getVuex("$user.userInfo");
-			that.form1.data.username = userInfo.username;
+			that.form1.data.empno = vk.getVuex("$user.login.empno");
 		},
 		// 监听 - 页面关闭
 		onClose() {
@@ -145,6 +149,28 @@ export default {
 		// 表单提交
 		submitForm() {
 			that.$refs.form1.submitForm();
+		},
+		async submit() {
+			let data = {
+				'empno': that.form1.data.empno,
+				'shop_id': vk.getVuex('$user.login.shop_id'),
+				'password': that.form1.data.oldPassword,
+				'new_pwd': that.form1.data.newPassword,
+			}
+			
+			await this.utils.post(
+				"/login/", data
+			).then(resp => {
+				// console.log(resp)
+				if (resp.code == 200) {
+					vk.toast('密码修改成功!')
+					this.onFormSuccess()
+				} else {
+					vk.toast("密码修改失败![" + resp.msg + "]")
+				}
+			}).catch(err => {
+				console.log(err)
+			})
 		}
 	},
 	watch: {

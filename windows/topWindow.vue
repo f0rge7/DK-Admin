@@ -3,8 +3,8 @@
 		<!-- 左侧 -->
 		<view class="left">
 			<navigator class="logo" open-type="reLaunch" url="/">
-				<image :src="logo1" mode="aspectFill" class="min-logo" v-show="vk.getVuex('$app.leftCollapse')"></image>
-				<image :src="logo2" mode="aspectFill" v-show="!vk.getVuex('$app.leftCollapse')"></image>
+				<image :src="vk.getVuex('$user.userInfo.logo1')" mode="aspectFill" class="min-logo" v-show="vk.getVuex('$app.leftCollapse')"></image>
+				<image :src="vk.getVuex('$user.userInfo.logo2')" mode="aspectFill" v-show="!vk.getVuex('$app.leftCollapse')"></image>
 			</navigator>
 		</view>
 		<!-- 右侧 -->
@@ -80,7 +80,8 @@
 								<vk-data-link :href="link.url" :text="link.text" />
 							</view>
 							<view class="menu-item text-overflow">
-								<text>{{ vk.getVuex("$user.userInfo.username") }}</text>
+								<!-- <text>{{ vk.getVuex("$user.userInfo.username") }}</text> -->
+								<text>{{ vk.getVuex("$user.login.empname") }}</text>
 							</view>
 							<view class="menu-item" @click="openForm('updatePassword')">
 								<text class="text-overflow">修改密码</text>
@@ -134,9 +135,11 @@ export default {
 			// 正方形 Logo 160*160
 			logo: config.staticUrl.navBar.logo,
 			// 长方形 Logo 224*160
-			logo1: config.staticUrl.navBar.logo1,
+			// logo1: config.staticUrl.navBar.logo1,
+			logo1: vk.getVuex("$user.userInfo.logo1"),
 			// 横幅 Logo 480*100
-			logo2: config.staticUrl.navBar.logo2,
+			// logo2: config.staticUrl.navBar.logo2,
+			logo2: vk.getVuex("$user.userInfo.logo2"),
 			// 主题配置
 			theme: config.theme,
 			// 右侧链接,只在开发模式时显示
@@ -168,6 +171,10 @@ export default {
 			vk.userCenter.logout({
 				success: function(data) {
 					if (typeof that.$refs.menuTabs.clear === "function") that.$refs.menuTabs.clear();
+					vk.setVuex("$user.login.empname", "")
+					vk.setVuex("$user.login.emptype", "")
+					vk.setVuex("$user.login.emppic", "")
+					uni.removeStorageSync("token")
 					uni.reLaunch({
 						url: config.login.url
 					});

@@ -184,7 +184,7 @@
 								httpRequest(obj) {
 									// let { action, file, filename, data, headers, onProgress, onSuccess, onError } = obj;
 									// 获取文件类型(image:图片 video:视频 other:其他)
-									this.$utils.upload(
+									this.utils.upload(
 										"/upload/", obj
 									).then(res => {
 										// console.log(res)
@@ -252,7 +252,7 @@
 					}
 				}
 				
-				await this.$utils.post(
+				await this.utils.post(
 					"/call/", data
 				).then(resp => {
 					if (resp.code == 200) {
@@ -276,7 +276,7 @@
 				
 				// console.log(data)
 				
-				await this.$utils.post(
+				await this.utils.post(
 					"/call/", data
 				).then(resp => {
 					// console.log(resp)
@@ -385,7 +385,7 @@
 						type: "44"
 					}
 				}
-				await this.$utils.post(
+				await this.utils.post(
 					"/call/", data
 				).then(res => {
 					// console.log(res)

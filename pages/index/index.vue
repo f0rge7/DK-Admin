@@ -1,6 +1,7 @@
 <template>
-	<view class="page-body no-user-select">
+	<view class="page-body">
 		<!-- <text class="content">欢迎来到云控制台</text> -->
+		<!-- <img src="https://bing.img.run/1920x1080.php" alt="Bing每日壁纸1080P高清" /> -->
 	</view>
 </template>
 
@@ -31,7 +32,7 @@
 		},
 		// 监听 - 页面【首次渲染完成时】执行。注意如果渲染速度快，会在页面进入动画完成前触发
 		onReady(){
-
+		
 		},
 		// 监听 - 页面每次【显示时】执行(如：前进和返回) (页面每次出现在屏幕上都触发，包括从下级页面点返回露出当前页面)
 		onShow() {
@@ -47,8 +48,9 @@
 		methods: {
 			// 页面数据初始化函数
 			init(options){
-				
-			
+				uni.setNavigationBarTitle({
+				  title: vk.getVuex("$user.login.shop_name"),
+				});
 			},
 			pageTo(path){
 				vk.navigateTo(path);
@@ -71,27 +73,15 @@
 	}
 </script>
 <style lang="scss" scoped>
-	/* #ifndef H5 */
-	page {
-		padding-top: 85px;
-	}
-	/* #endif */
 	.page-body {
 		width: 100%;
-		height: 85vh;
-		background: #46d0e7 url(../../static/bg/001.jpg?t=2) ;
+		height: calc(100vh - 220rpx);
+		background: #46d0e7 url(https://bing.img.run/1920x1080.php);
 		background-size: cover;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-direction: column;
-		
-		.content {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			font-size: 80rpx;
-			color: $uni-color-primary;
-		}
+		// img {
+		// 	object-fit: fill;
+		// 	width: 100%;
+		// 	height: 100%;
+		// }
 	}
 </style>

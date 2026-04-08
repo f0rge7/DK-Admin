@@ -15,19 +15,37 @@ const utils = {
 	// debug: true,
 	debug: false,
 	//接口地址
+	 formatUrl: function(url) {
+	  if (!url) return 'http://110.249.194.209';
+	  
+	  // 去除首尾空格
+	  url = url.trim();
+	  
+	  // 已经有 http 或 https 则直接返回
+	  if (/^https?:\/\//i.test(url)) {
+	    return url;
+	  }
+	  
+	  // 没有协议，补上 http://
+	  return 'http://' + url;
+	},
+	
 	interfaceUrl: function() {
 		if (utils.debug) {
-			return "http://127.0.0.1:8888/customer"
+			// return "http://127.0.0.1:8000/customer"
+			return "http://127.0.0.1:8000/business"
 		} else {
-			return "http://" + vk.getVuex('$user.server_ip') + "/customer"
+			let url = utils.formatUrl(vk.getVuex('$user.login.url'))
+			return url + "/business"
 		}
 	},
 	//图片地址
 	imageUrl: function() {
 		if (utils.debug) {
-			return "http://127.0.0.1:8888/media"
+			return "http://127.0.0.1:8000/media"
 		} else {
-			return "http://" + vk.getVuex('$user.server_ip') + "/media"
+			let url = utils.formatUrl(vk.getVuex('$user.login.url'))
+			return url + "/media"
 		}
 	},
 	toast: function(text, duration, success) {
@@ -54,27 +72,6 @@ const utils = {
 			}
 		})
 	},
-	isAndroid: function() {
-		const res = uni.getSystemInfoSync();
-		return res.platform.toLocaleLowerCase() == "android"
-	},
-	isPhoneX: function() {
-		const res = uni.getSystemInfoSync();
-		let iphonex = false;
-		let models=["iphonex","iphonexr","iphonexsmax","iphone11","iphone11pro","iphone11promax"]
-		const model=res.model.replace(/\s/g,"").toLowerCase()
-		if (models.includes(model)) {
-			iphonex = true;
-		}
-		return iphonex;
-	},
-	constNum: function() {
-		let time = 0;
-		// #ifdef APP-PLUS
-		time = this.isAndroid() ? 300 : 0;
-		// #endif
-		return time
-	},
 	/**
 	 * 请求数据处理
 	 * @param string url 请求地址
@@ -82,9 +79,16 @@ const utils = {
 	 *  GET or POST
 	 * @param {*} postData 请求参数
 	 */
-	request: function(url, method, postData) {
+	request: function(url, method, postData, showLoading=true) {
 		//接口请求
 		return new Promise((resolve, reject) => {
+			
+			if (showLoading) {
+				uni.showLoading({
+					title: '请稍候...'
+				})
+			}
+			
 			uni.request({
 				url: utils.interfaceUrl() + url,
 				data: postData,
@@ -100,13 +104,25 @@ const utils = {
 				fail: (res) => {
 					utils.toast("网络通讯失败，请稍后再试~")
 					reject(res)
+				},
+				complete() {
+					if (showLoading) {
+						uni.hideLoading()
+					}
 				}
 			})
 		})
 	},
-	cloudRequest: function(url, method, postData) {
+	cloudRequest: function(url, method, postData, showLoading=true) {
 		
 		return new Promise((resolve, reject) => {
+			
+			if (showLoading) {
+				uni.showLoading({
+					title: '请稍候...'
+				})
+			}
+			
 			uniCloud.callFunction({
 				name: "cloudRequest",
 				data: {
@@ -121,6 +137,11 @@ const utils = {
 				fail: (res) => {
 					utils.toast("网络通讯失败，请稍后再试~")
 					reject(res)
+				},
+				complete() {
+					if (showLoading) {
+						uni.hideLoading()
+					}
 				}
 			})
 		})
@@ -128,31 +149,31 @@ const utils = {
 	/*
 	 * 封装get/post
 	*/
-    get: function(url, data) {
-		if (!vk.getVuex('$user.server_ip')) {
-			return new Promise((resolve, reject) => {
-				resolve({'': ''})
-			})
-		}
+    get: function(url, data, showLoading=true) {
+		// if (!vk.getVuex('$user.server_ip')) {
+		// 	return new Promise((resolve, reject) => {
+		// 		resolve({'': ''})
+		// 	})
+		// }
 		
 		if (utils.debug) {
-			return utils.request(url, "GET", data)
+			return utils.request(url, "GET", data, showLoading)
 		} else {
-			return utils.cloudRequest(url, "GET", data)
+			return utils.cloudRequest(url, "GET", data, showLoading)
 		}
 		
 	},
-    post: function(url, data) {
-		if (!vk.getVuex('$user.server_ip')) {
-			return new Promise((resolve, reject) => {
-				resolve({'': ''})
-			})
-		}
+    post: function(url, data, showLoading=true) {
+		// if (!vk.getVuex('$user.server_ip')) {
+		// 	return new Promise((resolve, reject) => {
+		// 		resolve({'': ''})
+		// 	})
+		// }
 		
 		if (utils.debug) {
-			return utils.request(url, "POST", data)
+			return utils.request(url, "POST", data, showLoading)
 		} else {
-			return utils.cloudRequest(url, "POST", data)
+			return utils.cloudRequest(url, "POST", data, showLoading)
 		}
 	},
     upload: function(url, obj) {
@@ -160,34 +181,6 @@ const utils = {
 		
 		// if (utils.debug) {
 			return new Promise((resolve, reject) => {
-				// const uploadTask = uni.uploadFile({
-				// 	url: utils.interfaceUrl() + "/upload/",
-				// 	file: file,
-				// 	name: filename,
-				// 	header: {
-				// 		'Authorization': "JWT " + utils.getToken()
-				// 	},
-				// 	formData: {
-				// 		// sizeArrayText:""
-				// 		baseUrl: utils.imageUrl()
-				// 	},
-				// 	success(res) {
-				// 		let data = JSON.parse(res.data)
-				// 		if (data.code == 200) {
-				// 			let filename = utils.imageUrl() + '/' + data.data.url
-				// 			if (typeof onSuccess == "function") onSuccess(data.data);
-				// 			// resolve(filename)
-				// 			resolve(data.data.url)
-				// 		} else {
-				// 			utils.toast(res.msg)
-				// 		}
-						
-				// 	},
-				// 	fail(res) {
-				// 		reject(res)
-				// 		if (typeof onError == "function") onError(res);
-				// 	},
-				// });
 				let path1 = URL.createObjectURL(file)
 				// let imageUrl = URL.createObjectURL(file.raw)
 				pathToBase64(
@@ -255,6 +248,21 @@ const utils = {
 			day = "0" + day
 		}
 		return year + '-' + month + '-' + day
+	},
+	//判断是否登录
+	isLogin: function() {
+		return uni.getStorageSync("token") ? true : false
+	},
+	// 清空部分缓存，保留注册绑定信息
+	clear() {
+		vk.setVuex("$user.login.shop_id", "")
+		vk.setVuex("$user.login.shop_name", "")
+		vk.setVuex("$user.login.empno", "")
+		vk.setVuex("$user.login.password", "")
+		vk.setVuex("$user.login.empname", "")
+		vk.setVuex("$user.login.emptype", "")
+		vk.setVuex("$user.login.emppic", "")
+		uni.removeStorageSync("token")
 	},
 	
 }
