@@ -39,6 +39,7 @@ export default {
 		list: [
 			"/pages/login/*",
 			"/pages_template/*",
+			"/pages/screen/screen-local",
 		]
 	},
 	// 静态文件的资源URL地址

@@ -8,12 +8,12 @@
 			</view>
 			<view class="header-time">{{ currentTime }}</view>
 			<view class="header-tools">
-				<view class="tool-btn" @click="handleExport" v-if="!isFullScreen">
-					<text class="uicon-camera"></text> 导出图片
+				<view class="tool-btn" @click="handleExport">
+					<vk-data-icon class="uicon-camera" name="vk-icon-down_light" size="20"></vk-data-icon>
 				</view>
-				<view class="tool-btn" @click="toggleFullScreen">
+				<!-- <view class="tool-btn" @click="toggleFullScreen">
 					<text class="uicon-fullscreen"></text> {{ isFullScreen ? '退出全屏' : '全屏展示' }}
-				</view>
+				</view> -->
 			</view>
 		</view>
 
@@ -161,14 +161,14 @@
 		},
 		mounted() {
 			this.updateTime();
-			this.handleResize(); // 初始化缩放
+			// this.handleResize(); // 初始化缩放
 			window.addEventListener('resize', this.debounceResize);
-			document.addEventListener('fullscreenchange', this.handleFullscreenExit);
+			// document.addEventListener('fullscreenchange', this.handleFullscreenExit);
 			
 			this.$nextTick(() => {
 				this.initCharts();
 				// 首次加载数据
-				this.getData();
+				// this.getData();
 			});
 
 			// 自动刷新
@@ -177,16 +177,44 @@
 		beforeDestroy() {
 			clearInterval(this.timer);
 			window.removeEventListener('resize', this.debounceResize);
-			document.removeEventListener('fullscreenchange', this.handleFullscreenExit);
+			// document.removeEventListener('fullscreenchange', this.handleFullscreenExit);
 			Object.values(this.charts).forEach(chart => {
 				if (chart) chart.dispose();
 			});
 		},
 		onLoad() {
-			const leftWin = uni.getLeftWindowStyle();
-			const topWin = uni.getTopWindowStyle();
-			this.left = parseInt(leftWin.width) || 0
-			this.top = parseInt(topWin.height) || 0
+			var that = this
+			window.getData = (data) => {
+				console.log(data)
+				that.toggleFullScreen()
+				that.isLoading = true;
+				// 更新顶部卡片数据
+				that.cards = data.cards
+				
+				// 更新图表数据
+				that.chartData = data.charts
+				
+				// 更新图表显示
+				that.setChartOptions();
+				that.isLoading = false;
+				
+			}
+			//监听由pb发来的消息
+	// 		window.chrome.webview.addEventListener("message",
+	// 			arg => {
+	// 				console.log(arg);
+	// 				alert(arg.data);
+	// 			});
+	
+	// 		//异步方式触发pb事件
+	// 		document.getElementById("invokeMethodAsyncButton").addEventListener("click", async () => {
+	// 			const paramValue = document.getElementById("invokeMethodAsyncParam1").value;
+	// 			var json = {
+	// 				args: [paramValue, "hello", 3.45, 1234, "async"]
+	// 			};
+	// 			const resultValue = await pbInvokeEventAsync("ue_invoke", json);
+	// 			document.getElementById("invokeMethodAsyncOutput").textContent = resultValue;
+	// 		});
 		},
 		methods: {
 			// 新增：处理 ESC 键导致的退出全屏
@@ -212,7 +240,7 @@
 			    // 1. 获取浏览器窗口完整的可用宽高
 			    let clientWidth = window.innerWidth;
 			    let clientHeight = window.innerHeight;
-			
+				console.log(clientWidth, clientHeight)
 			    // 2. 只有在【非全屏】状态下，才需要扣除 uni-app 的框架组件
 			    if (!this.isFullScreen) {
 			        clientWidth -= this.left;
@@ -243,8 +271,8 @@
 				// 	padding: this.isFullScreen ? '5px' : '0px'
 				// };
 			    this.scaleStyle = {
-					width: `${this.designWidth}px`,
-					height: `${this.designHeight}px`,
+					width: `${this.designWidth - 1}px`,
+					height: `${this.designHeight - 1}px`,
 					position: 'absolute',
 					transform: `scale(${scaleX}, ${scaleY})`,
 					transformOrigin: 'left top',
@@ -252,10 +280,10 @@
 					top: `0px`,
 					transition: 'all 0.3s ease',
 					zIndex: 999 ,// 确保不被其他组件遮挡
-					overflow: 'hidden',
-					padding: !this.isFullScreen ? '0 20px' : '0px'
+					overflow: 'hidden'
+					// padding: this.isFullScreen ? '5px' : '0px'
 				};
-			
+				console.log(this.scaleStyle)
 			    // 6. 触发 Echarts 重绘
 			    this.$nextTick(() => {
 			        this.resizeCharts();
@@ -793,7 +821,7 @@
 		padding: 0;
 		// width: 100%;
 		// height: 100%;
-		overflow: hidden;
+		overflow: hidden !important;
 	}
     
 </style>
@@ -1061,7 +1089,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		z-index: 9999;
+		z-index: 99999;
 
 		.loading-content {
 			display: flex;

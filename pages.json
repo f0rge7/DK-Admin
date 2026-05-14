@@ -38,6 +38,15 @@
 			}
 		},
 		{
+			"path": "pages/screen/screen-local",
+			"style": {
+				"navigationBarTitleText": "数据大屏",
+				"topWindow": false,
+				"leftWindow": false,
+				"navigationStyle": "custom" // 同时隐藏原生导航栏
+			}
+		},
+		{
 			"path": "uni_modules/uni-pay/pages/success/success",
 			"style": {
 				"backgroundColor": "#F8F8F8",

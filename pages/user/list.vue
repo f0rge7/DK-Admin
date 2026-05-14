@@ -279,9 +279,9 @@
 							mobile:[
 								{ validator:vk.pubfn.validator("mobile"), message: '手机号格式错误', trigger: 'blur' }
 							],
-							admin_pwd: [
-								{ required:true, message:'超级用户密码为必填字段', trigger:'blur' },
-							]
+							// admin_pwd: [
+							// 	{ required:true, message:'超级用户密码为必填字段', trigger:'blur' },
+							// ]
 						},
 						// add 代表添加 update 代表修改
 						formType:"",
